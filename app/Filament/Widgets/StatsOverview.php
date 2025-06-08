@@ -6,6 +6,8 @@ use App\Models\Master\Partner;
 use App\Models\Rent\RentBill;
 use App\Models\Rent\RentIn;
 use App\Models\Rent\RentOut;
+use App\Models\User\Role;
+use App\Models\User\User;
 use Filament\Widgets\Concerns\InteractsWithPageFilters;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -16,22 +18,22 @@ class StatsOverview extends BaseWidget
 
     protected static bool $isLazy = false;
 
-    public int $totalRentIn = 0;
-    public int $totalRentOut = 0;
-    public int $totalPartners = 0;
-    public int $totalBillingUnpaid = 0;
+    public int $totalRole = 0;
+    public int $totalUsers = 0;
+    public int $totalUserActive = 0;
+    public int $totalUserInactive = 0;
 
     private function loadStatsData(): void
     {
-        $rentIn = RentIn::with(['partner'])->count();
-        $rentOut = RentOut::with(['rentIn'])->count();
-        $partner = Partner::with(['user'])->count();
-        $bills = RentBill::with(['rentIn'])->count();
+        $totalRole = Role::count();
+        $totalUsers = User::count();
+        $totalUserActive = User::userActive()->count();
+        $totalUserInactive = User::userInactive()->count();
 
-        $this->totalRentIn = $rentIn ?? 0;
-        $this->totalRentOut = $rentOut ?? 0;
-        $this->totalPartners = $partner ?? 0;
-        $this->totalBillingUnpaid = $bills ?? 0;
+        $this->totalRole = $totalRole ?? 0;
+        $this->totalUsers = $totalUsers ?? 0;
+        $this->totalUserActive = $totalUserActive ?? 0;
+        $this->totalUserInactive = $totalUserInactive ?? 0;
     }
 
     protected function getStats(): array
@@ -39,16 +41,16 @@ class StatsOverview extends BaseWidget
         $this->loadStatsData();
 
         return [
-            Stat::make('Total Rent In', $this->totalRentIn)
+            Stat::make('Total Role', $this->totalRole)
                 ->color('primary'),
 
-            Stat::make('Total Rent Out', $this->totalRentOut)
+            Stat::make('Total Users', $this->totalUsers)
                 ->color('success'),
 
-            Stat::make('Total Partners', $this->totalPartners)
+            Stat::make('Total User Active', $this->totalUserActive)
                 ->color('warning'),
 
-            Stat::make('Total Bill Unpaid', $this->totalBillingUnpaid)
+            Stat::make('Total User Inactive', $this->totalUserInactive)
                 ->color('danger')
         ];
     }

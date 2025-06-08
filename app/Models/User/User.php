@@ -84,12 +84,27 @@ class User extends Authenticatable
     | SCOPES
     |--------------------------------------------------------------------------
     */
+    public function scopeUserActive($query)
+    {
+        return $query->whereNotNull('email_verified_at');
+    }
+
+    public function scopeUserInactive($query)
+    {
+        return $query->whereNull('email_verified_at');
+    }
 
     /*
     |--------------------------------------------------------------------------
     | ACCESSORS
     |--------------------------------------------------------------------------
     */
+    public function getStatusAttribute()
+    {
+        return isset($this->email_verified_at)
+            ? \App\Enums\UserStatus::VERIFIED
+            : \App\Enums\UserStatus::UNVERIFIED;
+    }
 
     /*
     |--------------------------------------------------------------------------

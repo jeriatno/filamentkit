@@ -1,15 +1,11 @@
 {
-    "name": "satu/smi-logistic",
-    "description": "SMI Logistic Management System",
+    "name": "jeriatno/filamentkit",
+    "description": "Laravel Filament Starter Kit",
     "type": "project",
     "authors": [
         {
-            "name": "SMI Dev",
-            "email": "smidev@metrodata.co.id"
-        },
-        {
-            "name": "Iwan Jeriatno",
-            "email": "iwan.jeriatno@metrodata.co.id"
+            "name": "Jeriatno",
+            "email": "jeriat01@gmail.com"
         }
     ],
     "keywords": ["laravel", "framework"],

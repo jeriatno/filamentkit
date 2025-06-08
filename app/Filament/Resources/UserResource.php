@@ -48,11 +48,10 @@ class UserResource extends Resource implements HasShieldPermissions
                             ->label('Name')
                             ->required(),
 
-                        Select::make('roles')
+                        Select::make('role_id')
                             ->label('Role')
                             ->options(
-                                Role::excludePartner()
-                                    ->pluck('name', 'id')
+                                Role::pluck('name', 'id')
                                     ->mapWithKeys(fn ($name, $id) => [$id => Str::headline($name)])
                             )
                             ->preload()
@@ -85,11 +84,11 @@ class UserResource extends Resource implements HasShieldPermissions
                     ->sortable()
                     ->toggleable()
                     ->copyable(),
-                Tables\Columns\TextColumn::make('is_active')
+                Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->label('Status')
-                    ->formatStateUsing(fn($record) => $record->email_verified_at ? UserStatus::VERIFIED : UserStatus::UNVERIFIED)
-                    ->color(fn($record) => $record->email_verified_at ? 'success' : 'danger')
+                    ->formatStateUsing(fn($record) => $record->status)
+                    ->color(fn($record) => isset($record->email_verified_at) ? 'success' : 'danger')
                     ->searchable()
                     ->sortable()
                     ->toggleable(),

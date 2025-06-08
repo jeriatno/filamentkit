@@ -19,6 +19,7 @@ class CreateUser extends CreateRecord
 {
     protected static string $resource = UserResource::class;
     protected static ?string $title = 'New User';
+    protected ?int $roleId;
 
     protected function getCreateFormAction(): Action
     {
@@ -41,39 +42,14 @@ class CreateUser extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        $data['password'] = Hash::make('12345678');
+        $data['password'] = Hash::make('password');
+        $this->roleId = $data['role_id'];
         return $data;
     }
 
     protected function afterCreate(): void
     {
-        $this->record->load('roles');
-        if ($this->record->role->name === superadmin()) {
-            // Assign superadmin
-            $this->assignSuperAdminRole($this->record);
-        } else {
-            // Assign role to user
-            $this->record->assignRole($this->record->name);
-        }
-    }
-
-    public static function assignSuperAdminRole(User $user)
-    {
-        $existingSuperAdmin = User::role(superadmin())->exists();
-
-        if (!$existingSuperAdmin) {
-            $role = Role::where('name', superadmin())->first();
-            if ($role) {
-                $user->assignRole($role->name);
-
-                if (!$user->hasVerifiedEmail()) {
-                    $user->markEmailAsVerified();
-                }
-
-                if (!$user->hasChangedPassword()) {
-                    $user->markPasswordAsChanged();
-                }
-            }
-        }
+        $role = Role::find($this->roleId);
+        $this->record->assignRole($role->name);
     }
 }

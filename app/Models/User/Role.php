@@ -45,10 +45,6 @@ class Role extends SpatieRole
     | SCOPES
     |--------------------------------------------------------------------------
     */
-    public function scopeExcludePartner(Builder $query): Builder
-    {
-        return $query->where('name', '!=', Access::PARTNER);
-    }
 
     /*
     |--------------------------------------------------------------------------

@@ -26,16 +26,6 @@ if (!function_exists('access')) {
     }
 }
 
-if (!function_exists('partner')) {
-    /*
-     * Get the available employee instance.
-     */
-    function partner()
-    {
-        return access()->partner;
-    }
-}
-
 if (!function_exists('isSuperAdmin')) {
     /**
      * Check is SuperAdmin

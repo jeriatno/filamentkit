@@ -18,7 +18,7 @@ class UserPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_user');
+        return $user->can('{{ ViewAny }}');
     }
 
     /**
@@ -73,7 +73,7 @@ class UserPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_user');
+        return $user->can('{{ DeleteAny }}');
     }
 
     /**
