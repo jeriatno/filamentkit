@@ -2,8 +2,7 @@
 
 namespace App\Models;
 
-use App\User;
-use Backpack\CRUD\CrudTrait;
+use App\Models\User\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -11,7 +10,7 @@ use Ramsey\Uuid\Uuid;
 
 class SettingNotifications extends Model
 {
-    use CrudTrait, SoftDeletes;
+    use SoftDeletes;
 
     protected $table = 'setting_notifications';
     protected $keyType = 'string';

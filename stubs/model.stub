@@ -1,20 +1,26 @@
 <?php
 
-namespace App\Models;
+namespace {{ namespace }};
 
-use App\Models\User\User;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SettingStatusLog extends Model
+class {{ class }} extends Model
 {
+    use HasFactory;
+
     /*
     |--------------------------------------------------------------------------
     | GLOBAL VARIABLES
     |--------------------------------------------------------------------------
     */
-    protected $table = 'setting_status_logs';
+
+    // protected $primaryKey = 'id';
+    // public $timestamps = false;
     protected $guarded = ['id'];
+    // protected $fillable = [];
+    // protected $hidden = [];
+    // protected $dates = [];
 
     /*
     |--------------------------------------------------------------------------
@@ -27,40 +33,12 @@ class SettingStatusLog extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    public function loggable()
-    {
-        return $this->morphTo();
-    }
-
-    public function createdBy()
-    {
-        return $this->belongsTo(User::class, 'created_by', 'id');
-    }
 
     /*
     |--------------------------------------------------------------------------
     | SCOPES
     |--------------------------------------------------------------------------
     */
-    /**
-     * Scope a query to filter by polymorphic relationship.
-     */
-    public function scopeWhereLoggable($query, $type, $id): Builder
-    {
-        return $query->where(function ($query) use ($type, $id) {
-            $query->where("loggable_type", $type)
-                ->where("loggable_id", $id);
-        });
-    }
-
-    public function scopeWhereAction($query, $data, $action = [])
-    {
-        return $query->with('createdBy')
-            ->where('module', get_class($data)::app)
-            ->where("loggable_type", get_class($data))
-            ->where("loggable_id", $data->id)
-            ->whereIn("action", $action);
-    }
 
     /*
     |--------------------------------------------------------------------------

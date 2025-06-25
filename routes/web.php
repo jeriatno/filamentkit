@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Rents\RentInController;
+use Filament\Http\Controllers\Auth\EmailVerificationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/admin/login', function () {
+    return redirect()->route('filament.admin.auth.login');
+})->name('login');
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('rent-ins/download-template', [RentInController::class, 'download'])
-        ->name('rent-ins.download-template');
-});
+Route::redirect('/dashboard', '/');
+
+Route::get('/email/verify/{id}/{hash}', EmailVerificationController::class)
+    ->name('auth.email.verify');
+

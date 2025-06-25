@@ -1,0 +1,19 @@
+<?php
+
+namespace App\{{namespace}};
+
+use App\{{namespaceContract}}Contract;
+use App\{{namespaceModel}};
+use Illuminate\Database\Eloquent\Model;
+use App\Repositories\BaseRepository;
+
+class {{name}}Repository extends BaseRepository implements {{name}}Contract
+{
+    protected Model $model;
+
+    public function __construct({{name}} $model)
+    {
+        $this->model = $model;
+        parent::__construct($model);
+    }
+}

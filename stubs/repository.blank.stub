@@ -1,0 +1,11 @@
+<?php
+
+namespace App\{{namespace}};
+
+use App\{{namespaceContract}}Contract;
+use App\Repositories\BaseRepository;
+
+class {{name}}Repository implements {{name}}Contract
+{
+    //
+}

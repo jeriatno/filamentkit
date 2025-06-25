@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'SMI Logistic'),
+    'name' => env('APP_NAME', 'Filament Kit'),
 
     /*
     |--------------------------------------------------------------------------

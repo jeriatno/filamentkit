@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SettingEnvironment extends Model
 {
-    use CrudTrait, SoftDeletes;
+    use SoftDeletes;
 
     protected $table = 'setting_environments';
     public $guarded = [

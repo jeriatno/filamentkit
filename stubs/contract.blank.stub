@@ -1,0 +1,10 @@
+<?php
+
+namespace App\{{namespace}};
+
+use App\Contracts\BaseContract;
+
+interface {{name}}Contract
+{
+    //
+}

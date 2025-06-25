@@ -18,14 +18,6 @@ trait HasActionPermissions
     {
         return [
             'dashboard',
-            'rent::in',
-            'rent::out',
-            'goods::incoming::goods',
-            'goods::outcoming::goods',
-            'master::partner',
-            'master::rack',
-            'master::rate',
-            'master::warehouse',
             'role',
             'user',
         ];
