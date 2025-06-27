@@ -31,7 +31,7 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
-            ->path('admin')
+            ->path('')
             ->login()
 //            ->favicon(fn(GeneralSettings $settings) => asset($settings->site_favicon))
 //            ->brandName(fn(GeneralSettings $settings) => $settings->brand_name)
