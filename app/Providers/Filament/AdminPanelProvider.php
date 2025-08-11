@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Auth\Login;
 use App\Filament\Widgets\StatsOverview;
 use App\Livewire\MyProfileExtended;
 use Filament\Http\Middleware\Authenticate;
@@ -31,8 +32,8 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
-            ->path('')
-            ->login()
+            ->path('admin')
+            ->login(Login::class)
 //            ->favicon(fn(GeneralSettings $settings) => asset($settings->site_favicon))
 //            ->brandName(fn(GeneralSettings $settings) => $settings->brand_name)
 //            ->brandLogo(

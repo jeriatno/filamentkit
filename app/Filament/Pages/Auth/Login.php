@@ -38,7 +38,7 @@ class Login extends BasePage
         return TextInput::make('email')
             ->label(__('filament-panels::pages/auth/login.form.email.label'))
             ->email()
-            ->prefixIcon('icon-email')
+            ->prefixIcon('heroicon-o-envelope')
             ->required()
             ->autocomplete(false)
             ->autofocus()
@@ -72,7 +72,7 @@ class Login extends BasePage
                     )) : null
             )
             ->password()
-            ->prefixIcon('icon-password')
+            ->prefixIcon('heroicon-o-lock-closed')
             ->revealable(filament()->arePasswordsRevealable())
             ->autocomplete('current-password')
             ->required()
